@@ -1,5 +1,6 @@
-package ru.taksebe.telegram.writeRead.telegram;
+package com.bashka.turnlightsnotifications.controller;
 
+import com.bashka.turnlightsnotifications.telegram.TurnLightsNotificationsBot;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -10,10 +11,10 @@ import org.telegram.telegrambots.meta.api.objects.Update;
 @RestController
 @AllArgsConstructor
 public class WebhookController {
-    private final WriteReadBot writeReadBot;
+    private final TurnLightsNotificationsBot turnLightsNotificationsBot;
 
     @PostMapping("/")
     public BotApiMethod<?> onUpdateReceived(@RequestBody Update update) {
-        return writeReadBot.onWebhookUpdateReceived(update);
+        return turnLightsNotificationsBot.onWebhookUpdateReceived(update);
     }
 }

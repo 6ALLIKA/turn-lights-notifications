@@ -1,5 +1,7 @@
-package ru.taksebe.telegram.writeRead.config;
+package com.bashka.turnlightsnotifications.config;
 
+import com.bashka.turnlightsnotifications.converters.BytesToUserConverter;
+import com.bashka.turnlightsnotifications.converters.UserToBytesConverter;
 import org.springframework.boot.autoconfigure.data.redis.LettuceClientConfigurationBuilderCustomizer;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -9,8 +11,6 @@ import org.springframework.data.redis.core.convert.RedisCustomConversions;
 import org.springframework.data.redis.repository.configuration.EnableRedisRepositories;
 import org.springframework.data.redis.serializer.GenericJackson2JsonRedisSerializer;
 import org.springframework.data.redis.serializer.StringRedisSerializer;
-import ru.taksebe.telegram.writeRead.converters.BytesToWordConverter;
-import ru.taksebe.telegram.writeRead.converters.WordToBytesConverter;
 
 import java.util.Arrays;
 
@@ -38,6 +38,6 @@ public class RedisConfiguration {
 
     @Bean
     public RedisCustomConversions redisCustomConversions() {
-        return new RedisCustomConversions(Arrays.asList(new WordToBytesConverter(),new BytesToWordConverter()));
+        return new RedisCustomConversions(Arrays.asList(new UserToBytesConverter(),new BytesToUserConverter()));
     }
 }

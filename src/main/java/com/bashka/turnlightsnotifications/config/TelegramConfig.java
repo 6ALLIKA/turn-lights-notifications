@@ -1,4 +1,4 @@
-package ru.taksebe.telegram.writeRead.config;
+package com.bashka.turnlightsnotifications.config;
 
 import lombok.AccessLevel;
 import lombok.Getter;

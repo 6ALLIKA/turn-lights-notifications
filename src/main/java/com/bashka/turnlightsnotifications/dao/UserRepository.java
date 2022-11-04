@@ -1,9 +1,9 @@
-package ru.taksebe.telegram.writeRead.api.dictionaries;
+package com.bashka.turnlightsnotifications.dao;
 
+import com.bashka.turnlightsnotifications.model.User;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
-import ru.taksebe.telegram.writeRead.model.Dictionary;
 
 @Repository
-public interface DictionaryRepository  extends CrudRepository<Dictionary, String> {
+public interface UserRepository extends CrudRepository<User, String> {
 }

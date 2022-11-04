@@ -1,13 +1,11 @@
-package ru.taksebe.telegram.writeRead.constants.bot;
+package com.bashka.turnlightsnotifications.telegram.enums;
 
-/**
- * Названия кнопок основной клавиатуры
- */
 public enum ButtonNameEnum {
-    GET_TASKS_BUTTON("Создать файл с заданиями"),
-    GET_DICTIONARY_BUTTON("Скачать словарь"),
-    UPLOAD_DICTIONARY_BUTTON("Загрузить мой словарь"),
-    HELP_BUTTON("Помощь");
+    CONFIGURE("Налаштувати сповіщення"),
+    FIRST_GROUP("Перша група"),
+    SECOND_GROUP("Друга група"),
+    THIRD_GROUP("Третя група"),
+    HELP_BUTTON("Як користуватися ботом?");
 
     private final String buttonName;
 

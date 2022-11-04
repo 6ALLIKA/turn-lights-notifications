@@ -2,18 +2,35 @@ package com.bashka.turnlightsnotifications.model;
 
 import lombok.*;
 import lombok.experimental.FieldDefaults;
-import org.springframework.data.annotation.Id;
-import org.springframework.data.redis.core.RedisHash;
+
+import java.time.LocalTime;
+import java.util.Objects;
 
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-@RedisHash("user")
-public class User {
+@Builder
+public class TurnLightTimeRange {
+    LocalTime from;
+    LocalTime to;
 
-    @Id
-    String chatId;
-    String name;
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        TurnLightTimeRange that = (TurnLightTimeRange) o;
+
+        if (!Objects.equals(from, that.from)) return false;
+        return Objects.equals(to, that.to);
+    }
+
+    @Override
+    public int hashCode() {
+        int result = from != null ? from.hashCode() : 0;
+        result = 31 * result + (to != null ? to.hashCode() : 0);
+        return result;
+    }
 }

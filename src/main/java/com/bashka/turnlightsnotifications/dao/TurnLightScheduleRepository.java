@@ -1,9 +1,9 @@
 package com.bashka.turnlightsnotifications.dao;
 
-import com.bashka.turnlightsnotifications.model.User;
+import com.bashka.turnlightsnotifications.model.TurnLightSchedule;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface UserRepository extends CrudRepository<User, String> {
+public interface TurnLightScheduleRepository extends CrudRepository<TurnLightSchedule, String> {
 }
