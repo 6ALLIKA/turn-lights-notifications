@@ -2,18 +2,41 @@ package com.bashka.turnlightsnotifications.model;
 
 import lombok.*;
 import lombok.experimental.FieldDefaults;
-import org.springframework.data.annotation.Id;
-import org.springframework.data.redis.core.RedisHash;
+
+import java.util.List;
+import java.util.Objects;
 
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-@RedisHash("user")
-public class User {
+@Builder
+@ToString
+public class TurnLightDay {
+    String dayOfWeek;
+    List<TurnLightTimeRange> off;
+//    List<TurnLightTimeRange> on;
 
-    @Id
-    String chatId;
-    String name;
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        TurnLightDay that = (TurnLightDay) o;
+
+        if (!Objects.equals(dayOfWeek, that.dayOfWeek)) return false;
+//        if (!Objects.equals(off, that.off)) return false;
+
+        return Objects.equals(off, that.off);
+//        return Objects.equals(on, that.on);
+    }
+
+    @Override
+    public int hashCode() {
+        int result = dayOfWeek != null ? dayOfWeek.hashCode() : 0;
+        result = 31 * result + (off != null ? off.hashCode() : 0);
+//        result = 31 * result + (on != null ? on.hashCode() : 0);
+        return result;
+    }
 }
