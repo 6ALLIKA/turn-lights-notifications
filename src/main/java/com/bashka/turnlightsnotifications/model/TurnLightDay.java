@@ -12,10 +12,11 @@ import java.util.Objects;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
+@ToString
 public class TurnLightDay {
-    String groupNumber;
+    String dayOfWeek;
     List<TurnLightTimeRange> off;
-    List<TurnLightTimeRange> on;
+//    List<TurnLightTimeRange> on;
 
     @Override
     public boolean equals(Object o) {
@@ -24,16 +25,18 @@ public class TurnLightDay {
 
         TurnLightDay that = (TurnLightDay) o;
 
-        if (!Objects.equals(groupNumber, that.groupNumber)) return false;
-        if (!Objects.equals(off, that.off)) return false;
-        return Objects.equals(on, that.on);
+        if (!Objects.equals(dayOfWeek, that.dayOfWeek)) return false;
+//        if (!Objects.equals(off, that.off)) return false;
+
+        return Objects.equals(off, that.off);
+//        return Objects.equals(on, that.on);
     }
 
     @Override
     public int hashCode() {
-        int result = groupNumber != null ? groupNumber.hashCode() : 0;
+        int result = dayOfWeek != null ? dayOfWeek.hashCode() : 0;
         result = 31 * result + (off != null ? off.hashCode() : 0);
-        result = 31 * result + (on != null ? on.hashCode() : 0);
+//        result = 31 * result + (on != null ? on.hashCode() : 0);
         return result;
     }
 }

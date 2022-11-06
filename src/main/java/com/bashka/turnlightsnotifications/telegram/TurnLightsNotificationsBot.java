@@ -1,5 +1,6 @@
 package com.bashka.turnlightsnotifications.telegram;
 
+import com.bashka.turnlightsnotifications.dao.UserRepository;
 import com.bashka.turnlightsnotifications.telegram.enums.BotMessageEnum;
 import com.bashka.turnlightsnotifications.telegram.handlers.CallbackQueryHandler;
 import com.bashka.turnlightsnotifications.telegram.handlers.MessageHandler;
@@ -33,11 +34,15 @@ public class TurnLightsNotificationsBot extends SpringWebhookBot {
 
     final MessageHandler messageHandler;
     final CallbackQueryHandler callbackQueryHandler;
+    final UserRepository userRepository;
+    final TelegramApiClient telegramApiClient;
 
-    public TurnLightsNotificationsBot(SetWebhook setWebhook, MessageHandler messageHandler,CallbackQueryHandler callbackQueryHandler) {
+    public TurnLightsNotificationsBot(SetWebhook setWebhook, MessageHandler messageHandler, CallbackQueryHandler callbackQueryHandler, UserRepository userRepository, TelegramApiClient telegramApiClient) {
         super(setWebhook);
         this.messageHandler = messageHandler;
         this.callbackQueryHandler = callbackQueryHandler;
+        this.userRepository = userRepository;
+        this.telegramApiClient = telegramApiClient;
     }
 
     @Override
@@ -69,5 +74,16 @@ public class TurnLightsNotificationsBot extends SpringWebhookBot {
             }
         }
         return null;
+    }
+
+    public boolean sendMessageToAllUsers(String message) {
+        userRepository.findAll().forEach(user -> {
+            try {
+                telegramApiClient.sendMessage(user.getChatId(), message);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        });
+        return true;
     }
 }

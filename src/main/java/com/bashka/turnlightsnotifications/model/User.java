@@ -6,6 +6,7 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.redis.core.RedisHash;
 
 import java.util.Objects;
+import java.util.Set;
 
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @Getter
@@ -13,9 +14,11 @@ import java.util.Objects;
 @AllArgsConstructor
 @NoArgsConstructor
 @RedisHash("user")
+@ToString
 public class User {
     @Id
     String chatId;
+    Set<Group> groupNumbers;
 
     @Override
     public boolean equals(Object o) {

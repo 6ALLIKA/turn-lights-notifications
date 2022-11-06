@@ -15,10 +15,11 @@ import java.util.Objects;
 @NoArgsConstructor
 @Builder
 @RedisHash("turn_light_schedule")
+@ToString
 public class TurnLightSchedule {
 
     @Id
-    String dayOfWeek;
+    String groupNumber;
     List<TurnLightDay> scheduleInformation;
 
     @Override
@@ -28,13 +29,13 @@ public class TurnLightSchedule {
 
         TurnLightSchedule that = (TurnLightSchedule) o;
 
-        if (!Objects.equals(dayOfWeek, that.dayOfWeek)) return false;
+        if (!Objects.equals(groupNumber, that.groupNumber)) return false;
         return Objects.equals(scheduleInformation, that.scheduleInformation);
     }
 
     @Override
     public int hashCode() {
-        int result = dayOfWeek != null ? dayOfWeek.hashCode() : 0;
+        int result = groupNumber != null ? groupNumber.hashCode() : 0;
         result = 31 * result + (scheduleInformation != null ? scheduleInformation.hashCode() : 0);
         return result;
     }

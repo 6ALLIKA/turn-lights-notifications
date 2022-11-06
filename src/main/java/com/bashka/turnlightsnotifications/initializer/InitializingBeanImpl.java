@@ -21,6 +21,7 @@ public class InitializingBeanImpl implements InitializingBean {
 
     @Override
     public void afterPropertiesSet() throws Exception {
+        turnLightScheduleRepository.deleteAll();
         TurnLightTimeRange firstSlot = TurnLightTimeRange.builder()
                 .from(LocalTime.of(0, 0))
                 .to(LocalTime.of(1, 0))
@@ -57,70 +58,129 @@ public class InitializingBeanImpl implements InitializingBean {
                 .from(LocalTime.of(21, 0))
                 .to(LocalTime.of(23, 59))
                 .build();
+        TurnLightDay firstGroupMonday = TurnLightDay.builder()
+                .dayOfWeek("MONDAY")
+                .off(List.of(secondSlot, fifthSlot, eighthSlot))
+//                .on(List.of(firstSlot, thirdSlot, fourthSlot, sixthSlot, seventhSlot, ninthSlot))
+                .build();
+        TurnLightDay firstGroupTuesday = TurnLightDay.builder()
+                .dayOfWeek("TUESDAY")
+                .off(List.of(thirdSlot, sixthSlot, ninthSlot))
+//                .on(List.of(firstSlot, secondSlot, fourthSlot, fifthSlot, seventhSlot, eighthSlot))
+                .build();
+        TurnLightDay firstGroupWednesday = TurnLightDay.builder()
+                .dayOfWeek("WEDNESDAY")
+                .off(List.of(firstSlot, fourthSlot, seventhSlot))
+//                .on(List.of(secondSlot, thirdSlot, fifthSlot, sixthSlot, eighthSlot, ninthSlot))
+                .build();
+        TurnLightDay firstGroupThursday = TurnLightDay.builder()
+                .dayOfWeek("THURSDAY")
+                .off(List.of(secondSlot, fifthSlot, eighthSlot))
+//                .on(List.of(firstSlot, thirdSlot, fourthSlot, sixthSlot, seventhSlot, ninthSlot))
+                .build();
+        TurnLightDay firstGroupFriday = TurnLightDay.builder()
+                .dayOfWeek("FRIDAY")
+                .off(List.of(thirdSlot, sixthSlot, ninthSlot))
+//                .on(List.of(firstSlot, secondSlot, fourthSlot, fifthSlot, seventhSlot, eighthSlot))
+                .build();
+        TurnLightDay firstGroupSaturday = TurnLightDay.builder()
+                .dayOfWeek("SATURDAY")
+                .off(List.of(firstSlot, fourthSlot, seventhSlot))
+//                .on(List.of(secondSlot, thirdSlot, fifthSlot, sixthSlot, eighthSlot, ninthSlot))
+                .build();
+        TurnLightDay firstGroupSunday = TurnLightDay.builder()
+                .dayOfWeek("SUNDAY")
+                .off(List.of(secondSlot, fifthSlot, eighthSlot))
+//                .on(List.of(firstSlot, thirdSlot, fourthSlot, sixthSlot, seventhSlot, ninthSlot))
+                .build();
+        TurnLightSchedule firstGroupSchedule = TurnLightSchedule.builder()
+                .scheduleInformation(List.of(firstGroupMonday, firstGroupTuesday, firstGroupWednesday, firstGroupThursday, firstGroupFriday, firstGroupSaturday, firstGroupSunday))
+                .groupNumber("First")
+                .build();
+        List<TurnLightSchedule> firstGroupData = List.of(firstGroupSchedule);
         TurnLightDay secondGroupMonday = TurnLightDay.builder()
-                .groupNumber("Second")
+                .dayOfWeek("MONDAY")
                 .off(List.of(firstSlot, thirdSlot, sixthSlot, ninthSlot))
-                .on(List.of(secondSlot, fourthSlot, fifthSlot, seventhSlot, eighthSlot))
+//                .on(List.of(secondSlot, fourthSlot, fifthSlot, seventhSlot, eighthSlot))
                 .build();
         TurnLightDay secondGroupTuesday = TurnLightDay.builder()
-                .groupNumber("Second")
+                .dayOfWeek("TUESDAY")
                 .off(List.of(firstSlot, fourthSlot, seventhSlot))
-                .on(List.of(secondSlot, thirdSlot, fifthSlot, sixthSlot, eighthSlot, ninthSlot))
+//                .on(List.of(secondSlot, thirdSlot, fifthSlot, sixthSlot, eighthSlot, ninthSlot))
                 .build();
         TurnLightDay secondGroupWednesday = TurnLightDay.builder()
-                .groupNumber("Second")
+                .dayOfWeek("WEDNESDAY")
                 .off(List.of(secondSlot, fifthSlot, eighthSlot))
-                .on(List.of(fifthSlot, thirdSlot, fourthSlot, sixthSlot, seventhSlot, ninthSlot))
+//                .on(List.of(fifthSlot, thirdSlot, fourthSlot, sixthSlot, seventhSlot, ninthSlot))
                 .build();
         TurnLightDay secondGroupThursday = TurnLightDay.builder()
-                .groupNumber("Second")
+                .dayOfWeek("THURSDAY")
                 .off(List.of(thirdSlot, sixthSlot, ninthSlot))
-                .on(List.of(firstSlot, secondSlot, fourthSlot, fifthSlot, seventhSlot, eighthSlot))
+//                .on(List.of(firstSlot, secondSlot, fourthSlot, fifthSlot, seventhSlot, eighthSlot))
                 .build();
         TurnLightDay secondGroupFriday = TurnLightDay.builder()
-                .groupNumber("Second")
+                .dayOfWeek("FRIDAY")
                 .off(List.of(firstSlot, fourthSlot, seventhSlot))
-                .on(List.of(secondSlot, thirdSlot, fifthSlot, sixthSlot, eighthSlot, ninthSlot))
+//                .on(List.of(secondSlot, thirdSlot, fifthSlot, sixthSlot, eighthSlot, ninthSlot))
                 .build();
         TurnLightDay secondGroupSaturday = TurnLightDay.builder()
-                .groupNumber("Second")
+                .dayOfWeek("SATURDAY")
                 .off(List.of(secondSlot, fifthSlot, eighthSlot))
-                .on(List.of(firstSlot, thirdSlot, fourthSlot, sixthSlot, seventhSlot, ninthSlot))
+//                .on(List.of(firstSlot, thirdSlot, fourthSlot, sixthSlot, seventhSlot, ninthSlot))
                 .build();
         TurnLightDay secondGroupSunday = TurnLightDay.builder()
-                .groupNumber("Second")
+                .dayOfWeek("SUNDAY")
                 .off(List.of(thirdSlot,sixthSlot, ninthSlot))
-                .on(List.of(firstSlot, secondSlot, fourthSlot, fifthSlot, seventhSlot, eighthSlot))
+//                .on(List.of(firstSlot, secondSlot, fourthSlot, fifthSlot, seventhSlot, eighthSlot))
                 .build();
         TurnLightSchedule secondGroupSchedule = TurnLightSchedule.builder()
-                .scheduleInformation(List.of(secondGroupMonday))
+                .scheduleInformation(List.of(secondGroupMonday, secondGroupTuesday, secondGroupWednesday, secondGroupThursday, secondGroupFriday, secondGroupSaturday, secondGroupSunday))
+                .groupNumber("Second")
+                .build();
+        List<TurnLightSchedule> secondGroupData = List.of(secondGroupSchedule);
+        TurnLightDay thirdGroupMonday = TurnLightDay.builder()
                 .dayOfWeek("MONDAY")
+                .off(List.of(fourthSlot, seventhSlot))
+//                .on(List.of(firstSlot, secondSlot, thirdSlot, fifthSlot, sixthSlot, eighthSlot, ninthSlot))
                 .build();
-        TurnLightSchedule secondGroupSchedule1 = TurnLightSchedule.builder()
-                .scheduleInformation(List.of(secondGroupTuesday))
+        TurnLightDay thirdGroupTuesday = TurnLightDay.builder()
                 .dayOfWeek("TUESDAY")
+                .off(List.of(secondSlot, fifthSlot, eighthSlot))
+//                .on(List.of(firstSlot, thirdSlot, fourthSlot, sixthSlot, seventhSlot, ninthSlot))
                 .build();
-        TurnLightSchedule secondGroupSchedule2 = TurnLightSchedule.builder()
-                .scheduleInformation(List.of(secondGroupWednesday))
+        TurnLightDay thirdGroupWednesday = TurnLightDay.builder()
                 .dayOfWeek("WEDNESDAY")
+                .off(List.of(thirdSlot, sixthSlot, ninthSlot))
+//                .on(List.of(firstSlot, secondSlot, fourthSlot, fifthSlot, seventhSlot, eighthSlot))
                 .build();
-        TurnLightSchedule secondGroupSchedule3 = TurnLightSchedule.builder()
-                .scheduleInformation(List.of(secondGroupThursday))
+        TurnLightDay thirdGroupThursday = TurnLightDay.builder()
                 .dayOfWeek("THURSDAY")
+                .off(List.of(firstSlot, fourthSlot, seventhSlot))
+//                .on(List.of(secondSlot, thirdSlot, fifthSlot, sixthSlot, eighthSlot, ninthSlot))
                 .build();
-        TurnLightSchedule secondGroupSchedule4 = TurnLightSchedule.builder()
-                .scheduleInformation(List.of(secondGroupFriday))
+        TurnLightDay thirdGroupFriday = TurnLightDay.builder()
                 .dayOfWeek("FRIDAY")
+                .off(List.of(secondSlot, fifthSlot, eighthSlot))
+//                .on(List.of(firstSlot, thirdSlot, fourthSlot, sixthSlot, seventhSlot, ninthSlot))
                 .build();
-        TurnLightSchedule secondGroupSchedule5 = TurnLightSchedule.builder()
-                .scheduleInformation(List.of(secondGroupSaturday))
+        TurnLightDay thirdGroupSaturday = TurnLightDay.builder()
                 .dayOfWeek("SATURDAY")
+                .off(List.of(thirdSlot, sixthSlot, ninthSlot))
+//                .on(List.of(firstSlot, secondSlot, fourthSlot, fifthSlot, seventhSlot, eighthSlot))
                 .build();
-        TurnLightSchedule secondGroupSchedule6 = TurnLightSchedule.builder()
-                .scheduleInformation(List.of(secondGroupSunday))
+        TurnLightDay thirdGroupSunday = TurnLightDay.builder()
                 .dayOfWeek("SUNDAY")
+                .off(List.of(firstSlot, fourthSlot, seventhSlot))
+//                .on(List.of(secondSlot, thirdSlot, fifthSlot, sixthSlot, eighthSlot, ninthSlot))
                 .build();
-        List<TurnLightSchedule> secondGroupData = List.of(secondGroupSchedule, secondGroupSchedule1, secondGroupSchedule2, secondGroupSchedule3, secondGroupSchedule4, secondGroupSchedule5, secondGroupSchedule6);
+        TurnLightSchedule thirdGroupSchedule = TurnLightSchedule.builder()
+                .scheduleInformation(List.of(thirdGroupMonday, thirdGroupTuesday, thirdGroupWednesday, thirdGroupThursday, thirdGroupFriday, thirdGroupSaturday, thirdGroupSunday))
+                .groupNumber("Third")
+                .build();
+        List<TurnLightSchedule> thirdGroupData = List.of(thirdGroupSchedule);
+        turnLightScheduleRepository.saveAll(firstGroupData);
         turnLightScheduleRepository.saveAll(secondGroupData);
+        turnLightScheduleRepository.saveAll(thirdGroupData);
+
     }
 }

@@ -12,6 +12,7 @@ import java.util.Objects;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
+@ToString
 public class TurnLightTimeRange {
     LocalTime from;
     LocalTime to;
